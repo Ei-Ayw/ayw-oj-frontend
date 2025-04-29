@@ -1,0 +1,129 @@
+<template>
+  <a-row id="globalHeader" align="center" :wrap="false">
+    <a-col flex="auto">
+      <a-menu
+        mode="horizontal"
+        :selected-keys="selectedKeys"
+        @menu-item-click="doMenuClick"
+      >
+        <a-menu-item
+          key="0"
+          :style="{ padding: 0, marginRight: '38px' }"
+          disabled
+        >
+          <div class="title-bar">
+            <img class="logo" src="../assets/logo.png" />
+            <div class="title">CodingQuest</div>
+          </div>
+        </a-menu-item>
+        <a-menu-item v-for="item in visibleRoutes" :key="item.path">
+          {{ item.name }}
+        </a-menu-item>
+      </a-menu>
+    </a-col>
+    <a-col flex="100px">
+      <div>
+        <!-- 已登录时，只显示用户名 -->
+        <a v-if="isLogin">
+          {{ store.state.user?.loginUser?.userName }}
+        </a>
+        <!-- 未登录时，显示下拉菜单 -->
+        <a-dropdown v-else>
+          <a-button type="text">
+            未登录
+            <template #icon>
+              <icon-down />
+            </template>
+          </a-button>
+          <template #content>
+            <a-menu>
+              <a-menu-item @click="doLogin"> 登录 </a-menu-item>
+            </a-menu>
+          </template>
+        </a-dropdown>
+      </div>
+    </a-col>
+  </a-row>
+</template>
+
+<script setup lang="ts">
+import { useRouter } from "vue-router";
+import { computed, ref } from "vue";
+import { useStore } from "vuex";
+import checkAccess from "@/access/checkAccess";
+import { routes } from "@/router";
+
+const router = useRouter();
+const store = useStore();
+
+// 访问命名空间化的模块
+console.log(store.state.user.loginUser);
+
+// 判断是否登录
+const isLogin = computed(
+  () =>
+    store.state.user?.loginUser &&
+    store.state.user.loginUser.userName !== "未登录"
+);
+
+// 展示在菜单的路由数组
+const visibleRoutes = computed(() => {
+  return routes.filter((item, index) => {
+    if (item.meta?.hideInMenu) {
+      return false;
+    }
+    // 根据权限过滤菜单
+    if (
+      !checkAccess(store.state.user.loginUser, item?.meta?.access as string)
+    ) {
+      return false;
+    }
+    return true;
+  });
+});
+
+// 默认主页
+const selectedKeys = ref(["/"]);
+
+// 路由跳转后，更新选中的菜单项
+router.afterEach((to, from, failure) => {
+  selectedKeys.value = [to.path];
+});
+
+console.log();
+
+// setTimeout(() => {
+//   store.dispatch("user/getLoginUser", {
+//     userName: "121212121212",
+//     userRole: ACCESS_ENUM.ADMIN,
+//   });
+// }, 3000);
+
+const doMenuClick = (key: string) => {
+  router.push({
+    path: key,
+  });
+};
+
+const doLogin = () => {
+  router.push({
+    path: "/user/login",
+  });
+};
+</script>
+
+<style scoped>
+.title-bar {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  color: #444;
+  margin-left: 16px;
+}
+
+.logo {
+  height: 48px;
+}
+</style>
