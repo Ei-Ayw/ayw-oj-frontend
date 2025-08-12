@@ -51,7 +51,6 @@ AYW-OJ 是一个功能完整的在线编程评测系统，为编程学习者和�
 ### 环境要求
 
 - Node.js >= 14.0.0
-- Yarn >= 1.22.0
 
 ### 安装依赖
 
@@ -63,26 +62,16 @@ git clone https://github.com/Ei-Ayw/ayw-oj-frontend.git
 cd ayw-oj-frontend
 
 # 安装依赖
-yarn install
+npm install
 ```
 
 ### 开发运行
 
 ```bash
 # 启动开发服务器
-yarn serve
+npm run serve
 
 # 访问 http://localhost:8080
-```
-
-### 生产构建
-
-```bash
-# 构建生产版本
-yarn build
-
-# 代码检查
-yarn lint
 ```
 
 ## 📁 项目结构
