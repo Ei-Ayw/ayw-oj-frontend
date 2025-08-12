@@ -125,23 +125,6 @@ ayw-oj-frontend/
 - 📈 **数据统计** - 系统使用情况统计
 - ⚙️ **系统配置** - 评测参数配置
 
-## 🔧 配置说明
-
-### 环境变量配置
-
-创建 `.env.local` 文件：
-
-```env
-# API基础地址
-VUE_APP_API_BASE_URL=http://localhost:8080/api
-
-# 应用标题
-VUE_APP_TITLE=AYW-OJ
-
-# 是否开启调试模式
-VUE_APP_DEBUG=true
-```
-
 ### 开发配置
 
 项目使用 Vue CLI 进行构建，主要配置文件：
@@ -192,13 +175,12 @@ VUE_APP_DEBUG=true
 - **zhimianyun** - 集成AI用户行为分析的云桌面解决方案
 
 ### 📚 技术分享
-- CSDN博客：20+ 技术文章，涵盖AI竞赛和研究项目经验
+- [CSDN博客](https://blog.csdn.net/2301_79433391?type=blog)：20+ 技术文章，涵盖AI竞赛和研究项目经验
 - 开源贡献：积极参与开源项目，推动技术社区发展
 
 ## 📞 联系我们
 
 - 🔗 **GitHub**: [Ei-Ayw](https://github.com/Ei-Ayw)
-- 📧 **邮箱**: 欢迎通过GitHub联系
 - 💬 **讨论区**: [GitHub Discussions](#)
 - 🐛 **问题反馈**: [GitHub Issues](#)
 
@@ -211,4 +193,3 @@ VUE_APP_DEBUG=true
 Made with ❤️ by [Ei-Ayw](https://github.com/Ei-Ayw)
 
 </div>
-
